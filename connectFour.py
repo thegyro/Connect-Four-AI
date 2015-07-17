@@ -180,16 +180,43 @@ def main():
 	shape = (6, 7)
 
 	startState = ConnectFourState(shape)
-	abagent = adversary.AlphaBetaAgent(evaluationFunction,'O', 'X', depth=3)
-	#abagent = adversary.MinimaxAgent(evaluationFunction, 2)
 
+	print "Welcome to the Connect Four AI program."
+	print "Decide what agent you want to play against: "
+	print "Press 1 for a Minimax agent and 2 for an AlphaBeta agent: ",
+
+	try:
+		choice = int(raw_input().strip())
+	except ValueError as e:
+		print "Didn't press an integer dammit.Bye."
+		sys.exit(0)
+
+	print "Decide the depth you want the AI to go."
+	print "Beware! If you choose a depth > 3, I pray you have a long life with infinite patience."
+	print "Enter the depth: ",
+	d = int(raw_input().strip())
+
+	if choice == 1:
+		aiagent = adversary.MinimaxAgent(evaluationFunction, 'O', 'X', depth=d)
+
+	elif choice == 2:
+		aiagent = adversary.AlphaBetaAgent(evaluationFunction,'O','X', depth=d)
+
+	else:
+		print "Invalid choice :-/. Bye"
+		sys.exit(0)
+
+	
+	print "Press between 1 to 7 for deciding column number."
 	print "Starting State: "
 	startState.printBoard()
+
+	print 
 
 	state = startState
 	while 1:
 		print "AI's turn:"
-		action = abagent.getAction(state)
+		action = aiagent.getAction(state)
 		time.sleep(1)
 		print "AI puts in column %d \n" % (action + 1)
 
