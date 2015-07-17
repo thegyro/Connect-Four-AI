@@ -116,6 +116,10 @@ class ConnectFourState():
 
 
 def evaluationFunction(gameState, agent, adversary):
+	"""
+		Some fancy heuristic tushar suggested me to try so that my AI doesn't
+		suck at shallow depths.
+	"""
 	if gameState.isGoal(agent):
 		return 10000
 	if gameState.isGoal(adversary):
